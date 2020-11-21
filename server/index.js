@@ -3,14 +3,18 @@ const express = require('express');
 const bodyParser= require('body-parser');
 const PORT = process.env.PORT || 3050
 const app = express();
+const cors=require('cors');
+app.use(cors());
+
+
+
 app.use(bodyParser.json());
-
-
 
 
 //my sql 
 const mysql = require('mysql');
-const connection = mysql.createConnection({
+const connection = mysql.createConnection({   
+    
     host    : 'localhost',
     user    : 'Eduardo',
     password: '12345',
@@ -22,14 +26,13 @@ connection.connect(error=>{
     console.log('Database server running');
 });
 
-///------
+//----------------
 app.listen(PORT, ()=>{
     console.log(`server running on port ${PORT}`);
-})
+});
 app.get('/',(req,res)=>{
     res.send('welcome to my api');
 });
-
 app.get('/book',(req,res)=>{//list of books
     const sql = 'select * from books';
     connection.query(sql, (error, results)=>{
@@ -37,7 +40,7 @@ app.get('/book',(req,res)=>{//list of books
         if(results.length>0){
             res.json(results);             
         }
-        else res.send('no results')
+        else res.send('no results');
     })
     //res.send('list of books');
 });
@@ -49,7 +52,7 @@ app.post('/add', (req,res)=>{
 });
 app.put('/update/:id',(req,res)=>{
     res.send('update customer');
-})
+});
 app.put('/delete/:id',(req,res)=>{
     res.send('delete customer');
-})
+});
