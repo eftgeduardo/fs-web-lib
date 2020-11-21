@@ -38,7 +38,8 @@ app.get('/book',(req,res)=>{//list of books
     connection.query(sql, (error, results)=>{
         if(error) throw error;
         if(results.length>0){
-            res.json(results);             
+            //res.json(results);
+            res.json(results)          
         }
         else res.send('no results');
     })
