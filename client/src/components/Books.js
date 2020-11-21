@@ -1,34 +1,30 @@
 import React, { Component } from 'react'
-const { StringDecoder } = require('string_decoder');
+import axios from 'axios'
 
 class Books extends Component {
     
     
     constructor(props){
         super(props);
-        this.state={
+        this.state = {
             customers:[]
         };
+        
     }
 
 
     componentDidMount(){
-        fetch('http://localhost:3050/book')
-        .then(response=> response.json())
-        .then(customers=>this.setState({customers:customers},()=> {
-            console.log('customers fetched..', customers)
-            
-            const {id,book,description}=customers[0];
-            
-            const decoder = new StringDecoder('utf8');
-            console.log('Hola');
-            const cent = Buffer.from([0xC2, 0xA2]);
-            console.log(customers[0]);
-            }));
         
+        fetch('http://localhost:3050/book')
+        .then(res=> res.json())
+        .then(customers=>this.setState({customers:customers},()=> {
+            console.log('customers fetched..', customers);
+            console.log(customers[0].id);
+            console.log(customers[0].book);
+            console.log(customers[0].Desc);
+            }));
+    
     }
-
-    renderCustomer= ({id,book,description}) => <p key={id}>{book}</p>
 
 
 
@@ -36,10 +32,12 @@ class Books extends Component {
         const{customers} = this.state;
         return (
             <div>
-                <div>
-                    {customers.map(this.renderCustomer)}
-                </div>
+                <ul>
+                    {this.state.customers.map(customers =>
+                        <li key={customers.id}>{customers.id}{customers.book}{customers.Desc}</li>
+                        )}
 
+                </ul>
                 <h2>hola</h2>
             </div>
         )
