@@ -28,17 +28,16 @@ class Books extends Component {
         
     }
 
-    renderCustomer= ({id,book,description}) => <p key={id}>{book}</p>
-
-
-
     render() {
         const{customers} = this.state;
         return (
             <div>
-                <div>
-                    {customers.map(this.renderCustomer)}
-                </div>
+                 <ul>
+                    {this.state.customers.map(customers =>
+                        <li key={customers.id}>{customers.id}{customers.book}{customers.Desc}</li>
+                        )}
+
+                </ul>
 
                 <h2>hola</h2>
             </div>
