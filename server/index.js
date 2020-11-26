@@ -39,21 +39,39 @@ app.get('/book',(req,res)=>{//list of books
         if(error) throw error;
         if(results.length>0){
             //res.json(results);
-            res.json(results)          
+            res.json(results) 
+            console.log('book sent');          
         }
         else res.send('no results');
     })
     //res.send('list of books');
 });
-app.get('/customers/:id',(req,res)=>{
-    res.send('get customer by id');
+app.get('/book/:id',(req,res)=>{
+    const {id}= req.params;
+    const sql = `select * from books where book_id = ${id}`;
+    connection.query(sql, (error, results)=>{
+        if(error) throw error;
+        if(results.length>0){
+            //res.json(results);
+            res.json(results)
+                     
+        }
+        else res.send('no results');
+    })
 });
 app.post('/add', (req,res)=>{
+    /*const sql = `insert into books set ?`
+    customerObj={
+        name
+
+
+    }*/
+
     res.send('new customer');
 });
 app.put('/update/:id',(req,res)=>{
     res.send('update customer');
 });
-app.put('/delete/:id',(req,res)=>{
+app.delete('/delete/:id',(req,res)=>{
     res.send('delete customer');
 });
