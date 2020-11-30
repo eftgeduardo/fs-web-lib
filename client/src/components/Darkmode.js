@@ -19,7 +19,7 @@ export default class Darkmode extends Component {
         return (
             <div className="custom-control custom-switch">
                 <input type="checkbox" className="custom-control-input" id="darkSwitch" onClick={this.handleClick}></input>
-                <label className="custom-control-label" for="darkSwitch">DarkMode</label>
+                <label className="custom-control-label" htmlFor="darkSwitch">DarkMode</label>
             </div>
         )
     }

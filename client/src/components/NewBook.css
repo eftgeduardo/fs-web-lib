@@ -3,3 +3,12 @@
     height: 600px;
     padding: 10px;
   }
+  input[type="text"], textarea  {
+
+    background-color : #d1d1d1 !important; 
+  
+  }
+
+.submitBtn{
+  margin-top: 25px;
+}

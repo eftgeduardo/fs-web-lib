@@ -40,7 +40,7 @@ app.get('/book',(req,res)=>{//list of books
         if(results.length>0){
             //res.json(results);
             res.json(results) 
-            console.log('book sent');          
+            //console.log('book sent');          
         }
         else res.send('no results');
     })
@@ -58,18 +58,34 @@ app.get('/book/:id',(req,res)=>{
         }
         else res.send('no results');
     })
+
 });
 app.post('/add', (req,res)=>{
-    /*const sql = `insert into books set ?`
-    customerObj={
-        name
+    const sql = `insert into books set ?`;
 
-
-    }*/
-
-    res.send('new customer');
+    const booksObj = {
+        book_name: req.body.book_name,
+        book_description: req.body.book_description,
+        book_content: req.body.book_content
+    };
+    //{book_name,book_description,content}
+    connection.query(sql,booksObj, error=>{
+        if(error) throw error;
+        else res.send('Book created');
+    })
+    
+    /*const books=req.body;
+    if(booksObj!=""){
+        console.log("hola");
+    }
+    console.log(books);
+    console.log(books.book_content);*/
+    //res.send(client);
 });
 app.put('/update/:id',(req,res)=>{
+
+
+
     res.send('update customer');
 });
 app.delete('/delete/:id',(req,res)=>{
