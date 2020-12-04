@@ -1,5 +1,5 @@
 import React,{useState} from 'react'
-import "./NewBook.css";
+import "./styles/MdWritter.css";
 
 import ReactMde from "react-mde";
 import "react-mde/lib/styles/css/react-mde-all.css";
@@ -8,20 +8,6 @@ import ReactMarkdown from "react-markdown";
 import axios from "axios";
 
 export default function MdWritter() {
-    /*
-  onSubmit(){
-    axios.post('http://localhost:3050/add',{
-            firstName: 'Fred',
-            lastName: 'Flintstone'
-          })
-          .then(function (response) {
-            console.log(response);
-          })
-          .catch(function (error) {
-            console.log(error);
-          });
-  }*/
-  
   
   const mySubmitHandler = (event) => {
     event.preventDefault();
@@ -66,18 +52,18 @@ export default function MdWritter() {
             </div>
             <div>write the story</div>
             <ReactMde
-            value={valueContent}
-            onChange={setValueContent}
-            selectedTab={selectedTab}
-            onTabChange={setSelectedTab}
-            generateMarkdownPreview={(markdown) =>
-                Promise.resolve(<ReactMarkdown source={markdown} />)
-            }
-            childProps={{
-                writeButton: {
-                tabIndex: -1
-                }
-            }}
+              value={valueContent}
+              onChange={setValueContent}
+              selectedTab={selectedTab}
+              onTabChange={setSelectedTab}
+              generateMarkdownPreview={(markdown) =>
+                  Promise.resolve(<ReactMarkdown source={markdown} />)
+              }
+              childProps={{
+                  writeButton: {
+                  tabIndex: -1
+                  }
+              }}
             />
             <div className="submitBtn">  
               <button type="submit" className="btn btn-info">submit</button>

@@ -1,0 +1,19 @@
+.book-container{
+    margin-top:5px;
+}
+ul{
+
+    list-style-type: none;
+}
+.description{
+    display: block;
+}
+.description::first-letter{
+    text-transform: capitalize;
+}
+.title{
+    display: block;
+}
+.title::first-letter{
+    text-transform: capitalize;
+}
