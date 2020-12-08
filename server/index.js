@@ -82,12 +82,28 @@ app.post('/add', (req,res)=>{
     console.log(books.book_content);*/
     //res.send(client);
 });
-app.put('/update/:id',(req,res)=>{
+app.post('/update/:id',(req,res)=>{
+    const {id}= req.params;
+    const sql = `update books set ? where book_id = ${id}`;
+    const booksObj = {
+        book_name: req.body.book_name,
+        book_description: req.body.book_description,
+        book_content: req.body.book_content
+    };
+    
+    connection.query(sql,booksObj, error=>{
+        if(error) throw error;
+    })
 
-
-
-    res.send('update customer');
+    res.send('Book updated');
 });
 app.delete('/delete/:id',(req,res)=>{
-    res.send('delete customer');
+    //console.log('deleting');
+    const {id}= req.params;
+    const sql = `delete from books where book_id = ${id}`;
+    connection.query(sql ,error=>{
+        if(error) throw error;
+        res.send('Book deleted');
+    })
+
 });

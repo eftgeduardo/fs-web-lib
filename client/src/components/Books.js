@@ -2,13 +2,15 @@ import React, { Component } from 'react'
 import axios from "axios";
 import ReactMarkdown from 'react-markdown';
 import "./styles/Books.css"
+import EditBook from './EditBook';
+import { Link } from 'react-router-dom';
 
 export default class Books extends Component {
     constructor(props){
         super(props);
         this.state={
             name:"",
-            content:''
+            content:""
         }
     }
     
@@ -42,18 +44,31 @@ export default class Books extends Component {
             
         }
 
+    }
+    deleteBook=()=>{
+        axios.delete('http://localhost:3050/delete/'+this.props.match.params.id)
+          .then(function (response) {
+            console.log(response);
+            if (response.data=== 'Book deleted') {
+                alert("the book has been deleted");
+            };
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
+        this.props.history.push('/');
     }   
 
     render() {
         return (
             <div>
                 <div className="container">
-                    <div class="row justify-content-between">
-                        <div class="col-2">
-                            <button type="button" class="btn btn-secondary">Edit book</button>
+                    <div className="row justify-content-between">
+                        <div className="col-2">
+                            <Link to={"/edit/"+this.props.match.params.id} type="button" className="btn btn-secondary">Edit book</Link>
                         </div>
-                        <div class="col-2">
-                            <button type="button" class="btn btn-danger">Delete book</button>
+                        <div className="col-2">
+                            <button type="button" onClick={this.deleteBook} className="btn btn-danger">Delete book</button>
                         </div>
                     </div>
                 </div>
@@ -67,57 +82,4 @@ export default class Books extends Component {
     }
 }
 
-
-
-//import axios from 'axios';
-//import React from 'react'
-
-//import React from 'react'
-/*
-export default function Books({ match }) {
-
-    axios.get('http://localhost:3050/book/'+match.params.id)
-      .then(function (response) {
-        console.log(response.data[0].book_name);
-        book.name=response.data[0].book_name;
-        book.content=response.data[0].book_content;
-        //if (response.data=== 'Book created') alert("the book has been created");
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-
-
-    return (
-        <div>
-            <h1>{book.name}</h1>
-            <h1>{""}</h1>
-            <p>Me han pasado la id {match.params.id} en la url</p>
-        </div>
-    )
-}
-var book={
-    name:'a',
-    content:''
-};
-*/
-/*
-
-var book={
-        name:'',
-        content:''
-    };
-
-    axios.get('http://localhost:3050/book/'+match.params.id)
-      .then(function (response) {
-        console.log(response.data[0].book_name);
-        book.name=response.data[0].book_name;
-        book.content=response.data[0].book_content;
-        //if (response.data=== 'Book created') alert("the book has been created");
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-
-*/
 

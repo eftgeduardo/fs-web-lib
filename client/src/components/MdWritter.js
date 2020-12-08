@@ -18,7 +18,13 @@ export default function MdWritter() {
       })
       .then(function (response) {
         console.log(response);
-        if (response.data=== 'Book created') alert("the book has been created");
+        if (response.data=== 'Book created') {
+          alert("the book has been created");
+          setTitle("");
+          setDescription("");
+          setValueContent("");
+        }
+        
       })
       .catch(function (error) {
         console.log(error);
@@ -39,6 +45,7 @@ export default function MdWritter() {
               id="title"  required minLength="5" maxLength="20" 
               placeholder="Write a title"
               autoComplete="off"
+              value={title}
               onChange={event => setTitle(event.target.value)}
               />
             </div>
@@ -47,6 +54,7 @@ export default function MdWritter() {
               <textarea className="form-control" type="text"
               id="textDescription" required minLength="5" 
               maxLength="150" placeholder="Write a Description"
+              value={description}
               onChange={event => setDescription(event.target.value)}
               />
             </div>
